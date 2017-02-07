@@ -1,5 +1,4 @@
 require 'active_record'
-require 'database_cleaner'
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
