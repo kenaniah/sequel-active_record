@@ -3,7 +3,7 @@ module Sequel
 		module ActiveRecord
 			module Last
 				module DatasetMethods
-					def last! *args, &block
+					def last!(*args, &block)
 					  last(*args, &block) || raise(Sequel::NoMatchingRow.new(dataset))
 					end
 				end

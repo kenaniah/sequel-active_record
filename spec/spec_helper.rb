@@ -25,20 +25,20 @@ end
 module Helpers
 	def self.populate_database!
 
-		DB.drop_table :with_pk rescue nil
-		DB.create_table :with_pk {
+		DB.drop_table(:with_pk) rescue nil
+		DB.create_table(:with_pk) {
 			String :id, primary_key: true
 			String :val
 		}
 
-		DB.drop_table :without_pk rescue nil
-		DB.create_table :without_pk {
+		DB.drop_table(:without_pk) rescue nil
+		DB.create_table(:without_pk) {
 			String :id
 			String :val
 		}
 
-		DB.drop_table :empty_table rescue nil
-		DB.create_table :empty_table {
+		DB.drop_table(:empty_table) rescue nil
+		DB.create_table(:empty_table) {
 			String :id
 			String :val
 		}

@@ -3,7 +3,7 @@ module Sequel
 		module ActiveRecord
 			module First
 				module DatasetMethods
-					def first *args, &block
+					def first(*args, &block)
 						if ds = _primary_key_order
 							ds.first(*args, &block)
 						else
