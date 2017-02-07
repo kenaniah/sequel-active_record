@@ -1,5 +1,7 @@
 # ActiveRecord plugin for Sequel
 
+[![CircleCI](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master.svg?style=shield)](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master)
+
 Provides a set of features that make Sequel more compatible with code that was
 written for ActiveRecord. Long-term goal is to make a near drop-in replacement
 to ease the transition for projects that were previously built with ActiveRecord
@@ -54,10 +56,6 @@ When invoked without a specific array of features, the following are loaded by d
 | --- | --- | --- | --- |
 | `:first` | Overrides `#first` to implicitly sort by the primary key | [`#first`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-first) | [`#first`](http://sequel.jeremyevans.net/rdoc/classes/Sequel/Dataset.html#method-i-first)
 | `:last` | Provides `#last!`, but leaves Sequel's `#last` intact given its intuitive sort. **Sorts differently than ActiveRecord**. | [`#last`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last), [`#last!`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last-21) | [`#last`](http://sequel.jeremyevans.net/rdoc/classes/Sequel/Dataset.html#method-i-last)
-
-## To Do
-
- - [ ] CircleCI
 
 ## Contributing
 

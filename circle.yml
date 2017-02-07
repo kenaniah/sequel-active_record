@@ -1,3 +1,3 @@
 database:
   override:
-    - true
+    - echo "nothing to do here"
