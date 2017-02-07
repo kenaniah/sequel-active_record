@@ -1,3 +1,9 @@
 database:
   override:
     - echo "nothing to do here"
+test:
+  override:
+    - bundle exec rake test TESTOPTS="--ci-dir=$CIRCLE_TEST_REPORTS/reports":
+        parallel: true
+        files:
+          - spec/**/*_spec.rb
