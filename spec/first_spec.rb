@@ -4,25 +4,7 @@ class FirstSpec < Minitest::Spec
 
 	describe ":first feature" do
 		before do
-
-			DB.drop_table :with_pk
-			DB.create_table :with_pk {
-				String :id, primary_key: true
-				String :val
-			}
-
-			DB.drop_table :without_pk
-			DB.create_table :without_pk {
-				String :id
-				String :val
-			}
-
-			[:with_pk, :without_pk].each do |table|
-				DB[table].insert(id: "5", val: "first")
-				DB[table].insert(id: "2", val: "second")
-				DB[table].insert(id: "6", val: "third")
-			end
-
+			Helpers.populate_database!
 		end
 
 		it "implicitly sorts by primary key when present" do
