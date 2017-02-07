@@ -57,11 +57,11 @@ When invoked without a specific array of features, the following are loaded by d
 
 ## To Do
 
- - [ ] Write unit tests for `:last`
  - [ ] CircleCI
 
 ## Contributing
 
 Bug reports and pull requests are certainly welcome at https://github.com/kenaniah/sequel-active_record.
 
-I would like to grow a community around this gem, with
+I'm hoping to build a community around this gem, and am currently looking for maintainers
+who are interested in driving this project forward :-)
