@@ -14,16 +14,14 @@ Minitest::Reporters.use!(
 	Minitest.backtrace_filter
 )
 
-ActiveRecord::Base.establish_connection :adapter => "sqlite3", :database => ":memory:"
+# Database connections
+DB = Sequel.connect 'sqlite://test.db'
+ActiveRecord::Base.establish_connection :adapter => "sqlite3", :database => "test.db"
 
-DatabaseCleaner.strategy = :truncation
+#DB.loggers << Logger.new(STDOUT)
 
-class Minitest::Spec
-	before :each do
-		DatabaseCleaner.start
-	end
-
-	after :each do
-		DatabaseCleaner.clean
+class ActiveRecord::Base
+	def self.reverse col
+		self.order(col => :desc)
 	end
 end

@@ -4,56 +4,69 @@ class FirstSpec < Minitest::Spec
 
 	describe ":first feature" do
 		before do
-			@db = Sequel.connect 'sqlite://'
 
-			@db.create_table(:with_pk){
+			DB.drop_table :with_pk
+			DB.create_table :with_pk {
 				String :id, primary_key: true
 				String :val
 			}
-			@db.create_table(:without_pk){
+
+			DB.drop_table :without_pk
+			DB.create_table :without_pk {
 				String :id
 				String :val
 			}
 
 			[:with_pk, :without_pk].each do |table|
-				@db[table].insert(id: "5", val: "first")
-				@db[table].insert(id: "2", val: "second")
-				@db[table].insert(id: "6", val: "third")
+				DB[table].insert(id: "5", val: "first")
+				DB[table].insert(id: "2", val: "second")
+				DB[table].insert(id: "6", val: "third")
 			end
 
 		end
 
 		it "implicitly sorts by primary key when present" do
 
-			assert_equal 3, @db[:with_pk].count
+			assert_equal 3, DB[:with_pk].count
 
-			# Sequel model (no implicit sorting)
-			model = Sequel::Model @db[:with_pk]
-			@db.loggers << Logger.new(STDOUT)
-			assert_equal ["first", "second"], model.first(2).pluck(:val)
-			assert_equal ["third", "first"], model.reverse(:id).first(2).pluck(:val)
+			ar_model = Class.new ActiveRecord::Base do
+				self.table_name = :with_pk
+			end
+			plugin_model = Class.new(Sequel::Model DB[:with_pk]) do
+				self.plugin :active_record, features: :first
+			end
 
-			# Sequel model (with implicit sorting activated)
-			model.plugin :active_record, features: :first
-			assert_equal ["second", "first"], model.first(2).pluck(:val)
-			assert_equal ["third", "first"], model.reverse(:id).first(2).pluck(:val)
+			# Test each model
+			[ar_model, plugin_model].each do |model|
+
+				assert_equal ["second", "first"], model.first(2).pluck(:val)
+				assert_equal ["third", "first"], model.reverse(:id).first(2).pluck(:val)
+				assert_equal "second", model.first[:val]
+
+			end
 
 		end
 
 		it "behaves normally when primary key is not present" do
 
-			assert_equal 3, @db[:without_pk].count
+			assert_equal 3, DB[:without_pk].count
 
-			# Sequel model (no implicit sorting)
-			model = Sequel::Model @db[:without_pk]
-			@db.loggers << Logger.new(STDOUT)
-			assert_equal ["first", "second"], model.first(2).pluck(:val)
-			assert_equal ["third", "first"], model.reverse(:id).first(2).pluck(:val)
+			ar_model = Class.new ActiveRecord::Base do
+				self.table_name = :without_pk
+			end
+			plugin_model = Class.new(Sequel::Model DB[:without_pk]) do
+				self.plugin :active_record, features: :first
+			end
+			no_plugin_model = Class.new(Sequel::Model DB[:without_pk])
 
-			# Sequel model (with implicit sorting activated)
-			model.plugin :active_record, features: :first
-			assert_equal ["first", "second"], model.first(2).pluck(:val)
-			assert_equal ["third", "first"], model.reverse(:id).first(2).pluck(:val)
+			# Test each model
+			[ar_model, plugin_model, no_plugin_model].each do |model|
+
+				assert_equal ["first", "second"], model.first(2).pluck(:val)
+				assert_equal ["third", "first"], model.reverse(:id).first(2).pluck(:val)
+				assert_equal "first", model.first[:val]
+
+			end
 
 		end
 
