@@ -27,14 +27,38 @@ Or install it yourself as:
 
 ## Examples
 
-Coming soon...
+As with any Sequel plugin, this may be invoked on `Sequel::Model` or any of its subclasses. Specific features may be loaded by specifying an array.
+
+```ruby
+# Loads all features for all models
+Sequel::Model.plugin :active_record
+
+# Load selected features on a specific model
+class Artist < Sequel::Model; end;
+Artist.plugin :active_record, features: [:first, :last]
+
+# May be called multiple times to load additional features
+Artist.plugin :active_record, features: [:ordering]
+```
+
+### Default Features
+
+When invoked without a specific array of features, the following are loaded by default:
+
+ * `:first`
+ * `:last`
 
 ## Features
 
 | Feature | Description | ActiveRecord | Sequel |
 | --- | --- | --- | --- |
 | `:first` | Overrides `#first` to implicitly sort by the primary key | [`#first`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-first) | [`#first`](http://sequel.jeremyevans.net/rdoc/classes/Sequel/Dataset.html#method-i-first)
-| `:last` | Provides `#last!`, but leaves Sequel's `#last` intact given its more intuitive sort | [`#last`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last), [`#last!`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last-21) | [`#last`](http://sequel.jeremyevans.net/rdoc/classes/Sequel/Dataset.html#method-i-last)
+| `:last` | Provides `#last!`, but leaves Sequel's `#last` intact given its intuitive sort. **Sorts differently than ActiveRecord**. | [`#last`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last), [`#last!`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last-21) | [`#last`](http://sequel.jeremyevans.net/rdoc/classes/Sequel/Dataset.html#method-i-last)
+
+## To Do
+
+ - [ ] Write unit tests for `:last`
+ - [ ] CircleCI
 
 ## Contributing
 
