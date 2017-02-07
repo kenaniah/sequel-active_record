@@ -2,7 +2,7 @@
 
 require "bundler/setup"
 require "sequel"
-#require "sequel/active_record"
+require "sequel/active_record"
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
@@ -13,3 +13,5 @@ require "sequel"
 
 require "irb"
 IRB.start(__FILE__)
+
+DB = Sequel.connect 'sqlite://'

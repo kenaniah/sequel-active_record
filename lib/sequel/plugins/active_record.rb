@@ -14,6 +14,10 @@ module Sequel
 			# Loads requested features as plugins on the model
 			def self.configure model, features: DEFAULT_FEATURES
 
+				# Ensure an array
+				features = [features] unless Array === features
+
+				# Load each feature as a plugin
 				features.each do |feature|
 
 					# Sanity check the requested feature
