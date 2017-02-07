@@ -4,7 +4,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "sequel-active_record"
-  spec.version       = "0.0.0"
+  spec.version       = "0.0.1"
   spec.authors       = ["Kenaniah Cerny"]
   spec.email         = ["kenaniah@gmail.com"]
 
