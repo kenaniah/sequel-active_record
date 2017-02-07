@@ -20,6 +20,7 @@ ActiveRecord::Base.establish_connection :adapter => "sqlite3", :database => "tes
 
 #DB.loggers << Logger.new(STDOUT)
 
+# Monkey patches for testing purposes
 class ActiveRecord::Base
 	def self.reverse col
 		self.order(col => :desc)
