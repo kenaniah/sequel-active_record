@@ -1,6 +1,6 @@
 # ActiveRecord plugin for Sequel
 
-[![CircleCI](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master.svg?style=shield)](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master) [![Gem Version](https://badge.fury.io/rb/sequel-active_record.svg)](https://badge.fury.io/rb/sequel-active_record)
+[![CircleCI](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master.svg?style=shield)](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master) [![Gem Version](https://badge.fury.io/rb/sequel-active_record.svg)](https://badge.fury.io/rb/sequel-active_record) [![Semantically Versioned](http://img.shields.io/badge/semver-compliant-brightgreen.svg)](http://semver.org/)
 
 Provides a set of features that make Sequel more compatible with code that was
 written for ActiveRecord. Long-term goal is to make a near drop-in replacement
@@ -53,7 +53,19 @@ Artist.plugin :active_record, features: [:finder_methods]
 
 ## Semantic Versioning
 
+This gem is released responsibly and follows [semantic versioning](http://semver.org) best practices.
 
+To automatically receive new features as they're released:
+
+```ruby
+gem 'sequel-active_record', '~> 1.0'
+```
+
+To automatically receive bugfixes, but no new features:
+
+```ruby
+gem 'sequel-active_record', '~> 1.0.0'
+```
 
 ## Contributing
 
