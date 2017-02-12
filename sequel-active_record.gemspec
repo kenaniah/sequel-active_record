@@ -4,7 +4,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "sequel-active_record"
-  spec.version       = "1.0.0"
+  spec.version       = "1.1.0"
   spec.authors       = ["Kenaniah Cerny"]
   spec.email         = ["kenaniah@gmail.com"]
   spec.required_ruby_version = '>= 2.0'
