@@ -1,13 +1,22 @@
 #!/usr/bin/env ruby
-
 require "bundler/setup"
 require "sequel"
-require_relative "../spec/spec_helper.rb"
+require_relative "../spec/_init.rb"
 
 # Basic tables
 Helpers.populate_database!
 
-DB.loggers << Logger.new(STDOUT)
+unless ENV['LOGGING']
+	DB.loggers << Logger.new(STDOUT)
+end
+
+# Basic models
+AR = Class.new ActiveRecord::Base do
+	self.table_name = :with_pk
+end
+SEQUEL = Class.new(Sequel::Model DB[:with_pk]) do
+	self.plugin :active_record
+end
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.

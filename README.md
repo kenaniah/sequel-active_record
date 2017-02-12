@@ -1,6 +1,6 @@
 # ActiveRecord plugin for Sequel
 
-[![CircleCI](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master.svg?style=shield)](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master) [![Gem Version](https://badge.fury.io/rb/sequel-active_record.svg)](https://badge.fury.io/rb/sequel-active_record)
+[![CircleCI](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master.svg?style=shield)](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master) [![Gem Version](https://badge.fury.io/rb/sequel-active_record.svg)](https://badge.fury.io/rb/sequel-active_record) [![Semantically Versioned](http://img.shields.io/badge/semver-compliant-brightgreen.svg)](http://semver.org/)
 
 Provides a set of features that make Sequel more compatible with code that was
 written for ActiveRecord. Long-term goal is to make a near drop-in replacement
@@ -29,7 +29,7 @@ Or install it yourself as:
 
 ## Examples
 
-As with any Sequel plugin, this may be invoked on `Sequel::Model` or any of its subclasses. Specific features may be loaded by specifying an array.
+As with any Sequel plugin, this may be invoked on `Sequel::Model` or any of its subclasses. By default, all features are loaded. This may be changed by specifying an array of specific features during invocation.
 
 ```ruby
 # Loads all features for all models
@@ -40,22 +40,32 @@ class Artist < Sequel::Model; end;
 Artist.plugin :active_record, features: [:first, :last]
 
 # May be called multiple times to load additional features
-Artist.plugin :active_record, features: [:ordering]
+Artist.plugin :active_record, features: [:finder_methods]
 ```
-
-### Default Features
-
-When invoked without a specific array of features, the following are loaded by default:
-
- * `:first`
- * `:last`
 
 ## Features
 
 | Feature | Description | ActiveRecord | Sequel |
 | --- | --- | --- | --- |
 | `:first` | Overrides `#first` to implicitly sort by the primary key | [`#first`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-first) | [`#first`](http://sequel.jeremyevans.net/rdoc/classes/Sequel/Dataset.html#method-i-first)
+| `:finder_methods` | Provides support for `#find_by` and dynamic finders | [`#find_by`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-find_by), [dynamic finders](http://api.rubyonrails.org/classes/ActiveRecord/Base.html#class-ActiveRecord::Base-label-Dynamic+attribute-based+finders) | [`#[]`](http://sequel.jeremyevans.net/rdoc/classes/Sequel/Model/ClassMethods.html#method-i-5B-5D) |
 | `:last` | Provides `#last!`, but leaves Sequel's `#last` intact given its intuitive sort. **Sorts differently than ActiveRecord**. | [`#last`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last), [`#last!`](http://api.rubyonrails.org/classes/ActiveRecord/FinderMethods.html#method-i-last-21) | [`#last`](http://sequel.jeremyevans.net/rdoc/classes/Sequel/Dataset.html#method-i-last)
+
+## Semantic Versioning
+
+This gem is released responsibly and follows [semantic versioning](http://semver.org) best practices.
+
+To automatically receive new features as they're released:
+
+```ruby
+gem 'sequel-active_record', '~> 1.0'
+```
+
+To automatically receive bugfixes, but no new features:
+
+```ruby
+gem 'sequel-active_record', '~> 1.0.0'
+```
 
 ## Contributing
 
