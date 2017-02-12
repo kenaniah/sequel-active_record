@@ -35,9 +35,9 @@ module Helpers
 		}
 
 		[:with_pk, :without_pk].each do |table|
-			DB[table].insert(id: "5", val: "first", dup: "two")
-			DB[table].insert(id: "2", val: "second", dup: "two")
-			DB[table].insert(id: "6", val: "third", dup: "two")
+			DB[table].insert(id: "5", val: "first", dup: "shared")
+			DB[table].insert(id: "2", val: "second", dup: "shared")
+			DB[table].insert(id: "6", val: "third", dup: "shared")
 		end
 
 	end

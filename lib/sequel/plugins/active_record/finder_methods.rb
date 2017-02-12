@@ -13,13 +13,13 @@ module Sequel
 					# Emulate find_by
 					when :find_by, :find_by!
 						dataset = self.where(*args, &block)
-						result = dataset.[] **kwargs
+						result = dataset.[](**kwargs)
 						raise Sequel::NoMatchingRow.new(dataset) if strict && !result
 						result
 
 					# Emulate dynamic finders
 					when /^find_by_/
-						terms = name.to_s.sub("find_by_", "").split("_and_").map &:to_sym
+						terms = name.to_s.sub("find_by_", "").split("_and_").map(&:to_sym)
 						raise ::ArgumentError, "wrong number of arguments (given #{args.count}, expected #{terms.count})" unless args.count == terms.count
 						dataset = self.where(terms.zip(args).to_h, &block)
 						result = dataset.first
