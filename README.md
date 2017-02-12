@@ -1,6 +1,6 @@
 # ActiveRecord plugin for Sequel
 
-[![CircleCI](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master.svg?style=shield)](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master)
+[![CircleCI](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master.svg?style=shield)](https://circleci.com/gh/kenaniah/sequel-active_record/tree/master) [![Gem Version](https://badge.fury.io/rb/sequel-active_record.svg)](https://badge.fury.io/rb/sequel-active_record)
 
 Provides a set of features that make Sequel more compatible with code that was
 written for ActiveRecord. Long-term goal is to make a near drop-in replacement
