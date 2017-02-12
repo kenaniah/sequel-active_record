@@ -36,6 +36,12 @@ class FinderMethodsSpec < Minitest::Spec
 
 		end
 
+		it "provides dynamic finders" do
+
+			
+
+		end
+
 	end
 
 end
