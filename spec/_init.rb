@@ -17,24 +17,27 @@ module Helpers
 		DB.create_table(:with_pk) {
 			String :id, primary_key: true
 			String :val
+			String :dup
 		}
 
 		DB.drop_table(:without_pk) rescue nil
 		DB.create_table(:without_pk) {
 			String :id
 			String :val
+			String :dup
 		}
 
 		DB.drop_table(:empty_table) rescue nil
 		DB.create_table(:empty_table) {
 			String :id
 			String :val
+			String :dup
 		}
 
 		[:with_pk, :without_pk].each do |table|
-			DB[table].insert(id: "5", val: "first")
-			DB[table].insert(id: "2", val: "second")
-			DB[table].insert(id: "6", val: "third")
+			DB[table].insert(id: "5", val: "first", dup: "two")
+			DB[table].insert(id: "2", val: "second", dup: "two")
+			DB[table].insert(id: "6", val: "third", dup: "two")
 		end
 
 	end

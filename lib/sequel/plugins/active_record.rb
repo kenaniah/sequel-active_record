@@ -2,17 +2,12 @@ module Sequel
 	module Plugins
 		module ActiveRecord
 
-			DEFAULT_FEATURES = [
-				:first,
-				:last
-			].freeze
-
 			FEATURES = Dir[File.expand_path('../', __FILE__) + "/active_record/*.rb"].map{ |f|
 				File.basename(f, '.rb').to_sym
 			}
 
 			# Loads requested features as plugins on the model
-			def self.configure model, features: DEFAULT_FEATURES
+			def self.configure model, features: FEATURES
 
 				# Ensure an array
 				features = [features] unless Array === features
